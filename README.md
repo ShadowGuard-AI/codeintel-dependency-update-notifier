@@ -1,3 +1,5 @@
+![Banner](banner.png)
+
 # codeintel-Dependency-Update-Notifier
 Scans project dependencies and notifies the user if there are newer versions available, potentially including security updates. Uses `pip` and `packaging`. - Focused on Tools for static code analysis, vulnerability scanning, and code quality assurance
 
