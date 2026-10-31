@@ -121,10 +121,12 @@ def check_for_updates(installed_packages):
     identifies packages with potential updates.
     """
     updates_available = []
+    probed_count = 0
+    unknown_count = 0
 
     if installed_packages is None:
         logging.error("No installed packages found. Exiting.")
-        return updates_available
+        return updates_available, probed_count, unknown_count
 
     for package in installed_packages:
         package_name = package['name']
@@ -133,6 +135,7 @@ def check_for_updates(installed_packages):
         latest_version = get_latest_package_version(package_name)
 
         if latest_version:
+            probed_count += 1
             try:
                 if version.parse(installed_version) < version.parse(latest_version):
                     updates_available.append({
@@ -142,11 +145,13 @@ def check_for_updates(installed_packages):
                     })
                     logging.info(f"Update available for {package_name}: Installed version {installed_version}, latest version {latest_version}")
             except version.InvalidVersion as e:
+                unknown_count += 1
                 logging.warning(f"Invalid version format for {package_name}: {e}")
         else:
+            unknown_count += 1
             logging.warning(f"Could not retrieve latest version for {package_name}. Skipping update check.")
 
-    return updates_available
+    return updates_available, probed_count, unknown_count
 
 def check_security_vulnerabilities(project_path):
     """
@@ -162,17 +167,22 @@ def check_security_vulnerabilities(project_path):
         
         if result.returncode == 0:
             logging.info("No known security vulnerabilities found.")
+            return True
         elif result.returncode == 1:
             logging.warning("Security vulnerabilities found:")
             logging.warning(result.stdout) # Display the safety output
+            return True
         else:
              logging.error(f"Safety check failed with return code {result.returncode}: {result.stderr}")
+             return False
 
     except FileNotFoundError:
         logging.error("Safety not found. Please install it using: pip install safety")
+        return False
     except Exception as e:
         logging.error(f"An unexpected error occurred during safety check: {e}")
-        
+        return False
+
 def main():
     """
     Main function to execute the dependency update notifier.
@@ -198,24 +208,35 @@ def main():
         ]
         logging.info(f"Checking {len(installed_packages)} package(s) named in {args.requirements}.")
 
+    exit_code = 0
     if installed_packages:
-        updates_available = check_for_updates(installed_packages)
+        updates_available, probed_count, unknown_count = check_for_updates(installed_packages)
+        checked_count = len(installed_packages)
+        print(f"Summary: probed={probed_count} updated={len(updates_available)} unknown={unknown_count}")
 
         if updates_available:
             print("Updates available:")
             for update in updates_available:
                 print(f"- {update['name']}: Installed version {update['installed_version']}, latest version {update['latest_version']}")
-        else:
+        elif unknown_count == 0 and probed_count == checked_count:
             print("All dependencies are up to date.")
+        else:
+            print("Update check incomplete: some packages could not be checked.")
+        if unknown_count > 0:
+            exit_code = 1
     else:
         logging.error("Failed to retrieve installed packages. Check logs for details.")
         sys.exit(1)
 
     if args.check_security:
         logging.info("Checking for security vulnerabilities...")
-        check_security_vulnerabilities(args.project_path)
+        if not check_security_vulnerabilities(args.project_path):
+            logging.error("Security check did not complete: safety is missing or the safety run failed.")
+            exit_code = 1
 
     logging.info("Dependency update check complete.")
+    if exit_code:
+        sys.exit(exit_code)
 
 if __name__ == "__main__":
     main()
