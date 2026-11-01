@@ -54,6 +54,9 @@ def get_latest_package_version(package_name):
     Handles potential errors during the pip execution.
     """
     try:
+        # I ask pip for a version that cannot exist on purpose. The
+        # failure message is the data: pip lists every version it knows
+        # in its own error, and I read the latest out of that text.
         result = subprocess.run(["pip", "install", f"{package_name}==NonExistentVersion"], capture_output=True, text=True, check=False)
         output = result.stderr
         
@@ -79,6 +82,9 @@ def get_latest_package_version(package_name):
              return None
         
         # Return the last version in the list, assuming pip orders them chronologically
+        # I trust pip to list versions in release order and take the
+        # last one. If an index ever returns them in another order,
+        # this picks the wrong end and calls an old release latest.
         return versions[-1]
 
     except subprocess.CalledProcessError as e:
@@ -168,6 +174,9 @@ def check_security_vulnerabilities(project_path):
         if result.returncode == 0:
             logging.info("No known security vulnerabilities found.")
             return True
+        # Safety uses 1 to mean findings, not a broken run, so I count
+        # it as a completed check and pass. Only other codes, or the
+        # tool missing entirely, fail the security half here.
         elif result.returncode == 1:
             logging.warning("Security vulnerabilities found:")
             logging.warning(result.stdout) # Display the safety output
