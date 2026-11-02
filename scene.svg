@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="The reef in three depths: silt motes falling slowly in dark channel water, water passing through the sponge wall and leaving at the top while tube worm crowns open and close once, and empty shell spirals at rest on the silt with one mote settling on a shell lip">
+<rect x="0" y="0" width="1200" height="300" fill="#0a1a36"/>
+<g fill="#c8dcde"><circle cx="220" cy="20" r="3"><animate attributeName="cy" values="20;250" dur="26s" repeatCount="indefinite"/></circle><circle cx="520" cy="10" r="2.5"><animate attributeName="cy" values="10;240" dur="31s" begin="4s" repeatCount="indefinite"/></circle><circle cx="900" cy="16" r="3"><animate attributeName="cy" values="16;246" dur="28s" begin="8s" repeatCount="indefinite"/></circle></g>
+<g stroke="#8cd8e0" stroke-width="3"><line x1="520" y1="96" x2="520" y2="230"/><line x1="680" y1="96" x2="680" y2="230"/><line x1="520" y1="120" x2="680" y2="120"/><line x1="520" y1="170" x2="680" y2="170"/><line x1="520" y1="220" x2="680" y2="220"/></g>
+<ellipse cx="600" cy="92" rx="84" ry="12" fill="#60cc80"/>
+<g stroke="#e8bed2" stroke-width="3"><path d="M380 226 l-16 -22 M380 226 l0 -26 M380 226 l16 -22"><animate attributeName="opacity" values="1;0.35;1" dur="18s" repeatCount="indefinite"/></path><path d="M830 226 l-16 -22 M830 226 l0 -26 M830 226 l16 -22"><animate attributeName="opacity" values="1;1;0.35;1" dur="22s" begin="5s" repeatCount="indefinite"/></path></g>
+<rect x="0" y="238" width="1200" height="62" fill="#a8a490"/>
+<g fill="none" stroke="#d6d0b8" stroke-width="3"><path d="M270 268 a22 12 0 1 1 30 8"/><path d="M880 272 a22 12 0 1 1 30 8"/></g>
+<circle cx="292" cy="256" r="3" fill="#c8dcde"><animate attributeName="cy" values="238;256;256" keyTimes="0;0.4;1" dur="20s" repeatCount="indefinite"/></circle>
+</svg>

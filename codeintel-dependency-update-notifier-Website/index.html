@@ -3,164 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Codeintel Dependency Update Notifier: what it is, how it runs, where it stops</title>
-<meta name="description" content="Codeintel Dependency Update Notifier is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
-<style>
-:root {
-  --bg: #e8dec4; --panel: #f4ecd6; --ink: #183636;
-  --mut: #ffffff;
-  --acc: #147a72; --acc2: #c65434;
-  --line: #f4ecd6;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: 'Book Antiqua', Georgia, serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'Andale Mono', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
+<title>codeintel-dependency-update-notifier: Glass Sponge Reef of the Deep Channel</title>
+<style>@font-face{font-family:'Baumans';src:url('fonts/Baumans.ttf') format('truetype');}@font-face{font-family:'Cabin';src:url('fonts/Cabin.ttf') format('truetype');}
+:root{--ground:#0a1a36;--panel:#cfe8ea;--head:#60cc80;--ink:#eef4f2;--accent:#8cd8e0}
+*{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font-family:'Cabin',sans-serif;line-height:1.65}
+h1,h2,h3{font-family:'Baumans',sans-serif;color:var(--head)}
+.hero img.heroimg{width:100%;height:54vh;object-fit:cover;display:block}
+.hero .in,main,footer{max-width:1120px;margin:0 auto;padding:1rem 6vw 2rem}.logo{width:210px}
+nav{display:flex;gap:1rem;flex-wrap:wrap;margin:1.2rem 0}
+.btn{display:inline-block;text-decoration:none;font-family:'Baumans',sans-serif;color:var(--head);background:var(--panel);border:2px solid var(--accent);border-radius:6px;padding:.75rem 1.2rem}
+.btn:hover{filter:brightness(1.15)}.btn:active{transform:translateY(2px)}.btn:focus-visible{outline:4px double var(--accent);outline-offset:3px}
+a{color:var(--head)}
+.plate{background:var(--panel);color:#14202c;padding:.4rem 1.5rem 1.3rem;margin:1.8rem 0;position:relative}
+.plate h2,.plate h3{color:#123a5e}
+pre{background:#22202a;color:#f4f2ea;padding:1rem;overflow-x:auto;white-space:pre-wrap}
+.drops{height:14px;margin:1.6rem 0;border-top:2px solid var(--accent)}
+.callout{border-left:8px solid var(--accent);padding:.2rem 1.3rem 1rem;margin:1.3rem 0;background:rgba(255,255,255,.35)}
+.flag{border:3px solid var(--accent);padding:.2rem 1.2rem 1rem;margin:1.2rem 0}
+.entry{display:flex;gap:1rem;padding:.55rem 0;border-bottom:1px solid rgba(30,28,36,.22)}.entry b{min-width:210px}
+.count{color:#8cd8e0;font-weight:bold}
 </style>
 </head>
-<body class="layout-poster">
-<!-- This page exists for codeintel-dependency-update-notifier alone: the layout (poster),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
+<body>
 <header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Codeintel Dependency Update Notifier logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Codeintel Dependency Update Notifier</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/codeintel-dependency-update-notifier">github.com/ShadowGuard-AI/codeintel-dependency-update-notifier</a></p>
+<img class="heroimg" src="assets/intro-banner.png" alt="Reef with no lettering: silt and shell spirals in the foreground, the glass sponge lattice lit in midground with worm crowns open beside it, and channel dark behind with falling motes">
+<div class="in">
+<img class="logo" src="assets/logo.png" alt="One glass sponge, a vase of silica footed on reef rock with a fine regular lattice, glacier melt cyan light through its walls, plankton green at the rim, and the name below in dark blue on pale silt">
+<h1>codeintel-dependency-update-notifier</h1>
+<p>A dive log, read top to bottom, entry by entry. Krill pink is spent once per entry, on the count line only.</p>
+<nav><a class="btn" href="#s0">Scan the Installed Set</a><a class="btn" href="#s1">Limit to a Requirements File</a><a class="btn" href="#s2">Choose the Project Folder</a><a class="btn" href="#s3">Run the Safety Check</a><a class="btn" href="#s4">Read the Help</a></nav>
+</div>
 </header>
-
 <main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/codeintel-dependency-update-notifier">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Codeintel Dependency Update Notifier is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Codeintel Dependency Update Notifier: 5 files, 242 counted
-          lines across Python 221, Markdown 20, Text 1. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/codeintel-dependency-update-notifier.git<br>$ cd codeintel-dependency-update-notifier</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 9 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)
-
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command-line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(description=&quot;Scans project dependencies and notifies if newer versions are available.&quot;)
-    parser.add_argument(&quot;-r&quot;, &quot;--requirements&quot;, type=str, help=&quot;Path to a requirements file. When given, only the packages named in it are checked.&quot;, default=None)
-    parser.add_argument(&quot;-p&quot;, &quot;--project_path&quot;, type=str, help=&quot;Path to the project directory. Defaults to current directory.&quot;, default=&quot;.&quot;)
-    parser.add_argument(&quot;-v&quot;, &quot;--verbose&quot;, action=&quot;store_true&quot;, help=&quot;Enable verbose logging.&quot;)
-    parser.add_argument(&quot;--check-security&quot;, action=&quot;store_true&quot;, help=&quot;Check for known security vulnerabilities using safety.&quot;)
-    return parser.parse_args()
-
-def get_installed_packages(project_path):
-    &quot;&quot;&quot;
-    Retrieves the list of installed packages within the specified project path using pip.
-    Handles potential errors during the pip execution.
-    &quot;&quot;&quot;
-    try:
-        # Construct the command to list installed packages
-        command = [&quot;pip&quot;, &quot;list&quot;, &quot;--format=json&quot;]
-        if project_path != &quot;.&quot;:</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>221</td></tr>
-        <tr><td><code>README.md</code></td><td>20</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>1</td></tr>
-        <tr><td><code>banner.png</code></td><td>0</td></tr>
-        <tr><td><code>logo.png</code></td><td>0</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, get_installed_packages, get_latest_package_version, parse_requirement_names, check_for_updates, check_security_vulnerabilities, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/codeintel-dependency-update-notifier/tree/main/codeintel-dependency-update-notifier-Visuals">codeintel-dependency-update-notifier-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Codeintel Dependency Update Notifier">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Codeintel Dependency Update Notifier">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Codeintel Dependency Update Notifier">
-        </div>
-      </section>
-    </div>
-  </section>
+<section class="plate" id="s0"><h2>Reef Log, the Task</h2><p>Scans project dependencies and notifies the user if there are newer versions available, potentially including security updates. Uses pip and packaging.</p><p>Code facts, stated beside it: installed packages come from pip list, read as JSON. Latest versions are not fetched from an index page. The code asks pip to install a version that cannot exist; pip refuses, and its refusal lists every version it knows. The code reads the last version in that list and calls it latest.</p><p>Risk note, at the same size: pip order is trusted. Another order, wrong answer.</p></section>
+<div class="drops"></div>
+<section class="plate" id="s1"><h2>Clone Line, Flagged</h2><pre>git clone https://github.com/ShadowStrikeHQ/codeintel-dependency-update-notifier</pre><div class='flag'><h3>Clone line flagged</h3><p>Wrong organisation. The organisation is ShadowGuard-AI. The line is printed exactly as the README prints it and is not fixed in place.</p></div><p>Repository fact, not a README fact: requirements.txt lists packaging at 23.0 or above. Nothing else.</p></section>
+<div class="drops"></div>
+<section class="plate" id="s2"><h2>Invocation, the True Line at Full Size</h2><pre>python3 main.py [-r REQUIREMENTS] [-p PROJECT_PATH] [-v] [--check-security]</pre><p>That is the true line, from the parser in main.py. Below it, small and labelled, the README line as printed:</p><pre>./codeintel-dependency-update-notifier [params]</pre><p>Status: placeholder. No such entry point. No such argument.</p></section>
+<div class="drops"></div>
+<section class="plate" id="s3"><h2>Arguments, Parser Order</h2><div class='entry'><b>-h</b><span>Help message, then exit.</span></div><div class='entry'><b>-r, --requirements</b><span>Path to a requirements file. Default: none. Only names are taken from the file: specifiers are dropped, extras are dropped, markers are dropped, comment text is cut, lines starting with a dash are skipped, and names are normalised to lower case with underscore changed to dash. The installed list is then cut down to those names. Failure fact: file unreadable, run exits 1. It does not fall back to checking everything.</span></div><div class='entry'><b>-p, --project_path</b><span>Path to the project directory. Default: the current directory.</span></div><div class='entry'><b>-v, --verbose</b><span>Verbose logging.</span></div><div class='entry'><b>--check-security</b><span>Check for known security vulnerabilities using safety.</span></div></section>
+<div class="drops"></div>
+<section class="plate" id="s4"><h2>Probed and Counted, Last in the List Means Latest</h2><p class='count'>Summary: probed=N updated=N unknown=N</p><p>That closing line prints on every completed scan. Updates are then listed, name by name, installed version beside latest version. The up to date line is printed only when probed equals the number checked, unknown is zero, and no update waits. Any other outcome prints instead: Update check incomplete: some packages could not be checked.</p><div class='callout'><h3>Unknown Packages End the Run at Exit 1</h3><p>Exit 1: any checked package ends unknown. Exit 1: installed packages cannot be retrieved at all. Exit 1 under --check-security: safety is missing, or the safety run fails.</p></div><div class='callout'><h3>Safety Findings Are Not a Failed Safety Run</h3><p>Safety return code 1 means findings, and findings count as a finished check here, not a failed one. Return code 0 means no findings. Other codes fail the security half.</p></div></section>
+<div class="drops"></div>
+<section class="plate" id="s5"><h2>Licence Entry, Last in the Log</h2><pre>Copyright (c) ShadowStrikeHQ</pre><p>The README line as printed: wrong organisation, the same fault as the clone line. Repository fact: the LICENSE file carries the MIT License. Both facts are printed. Neither is reconciled silently.</p></section>
 </main>
-<footer>
-  <p>Codeintel Dependency Update Notifier is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
+<footer><p>Theme: Glass Sponge Reef of the Deep Channel. Type: Baumans for display, Cabin for reading, both SIL Open Font License 1.1.</p></footer>
 </body>
 </html>
