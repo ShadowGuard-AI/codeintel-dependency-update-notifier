@@ -3,50 +3,94 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>codeintel-dependency-update-notifier: Glass Sponge Reef of the Deep Channel</title>
-<style>@font-face{font-family:'Baumans';src:url('fonts/Baumans.ttf') format('truetype');}@font-face{font-family:'Cabin';src:url('fonts/Cabin.ttf') format('truetype');}
-:root{--ground:#0a1a36;--panel:#cfe8ea;--head:#60cc80;--ink:#eef4f2;--accent:#8cd8e0}
-*{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font-family:'Cabin',sans-serif;line-height:1.65}
-h1,h2,h3{font-family:'Baumans',sans-serif;color:var(--head)}
-.hero img.heroimg{width:100%;height:54vh;object-fit:cover;display:block}
-.hero .in,main,footer{max-width:1120px;margin:0 auto;padding:1rem 6vw 2rem}.logo{width:210px}
-nav{display:flex;gap:1rem;flex-wrap:wrap;margin:1.2rem 0}
-.btn{display:inline-block;text-decoration:none;font-family:'Baumans',sans-serif;color:var(--head);background:var(--panel);border:2px solid var(--accent);border-radius:6px;padding:.75rem 1.2rem}
-.btn:hover{filter:brightness(1.15)}.btn:active{transform:translateY(2px)}.btn:focus-visible{outline:4px double var(--accent);outline-offset:3px}
-a{color:var(--head)}
-.plate{background:var(--panel);color:#14202c;padding:.4rem 1.5rem 1.3rem;margin:1.8rem 0;position:relative}
-.plate h2,.plate h3{color:#123a5e}
-pre{background:#22202a;color:#f4f2ea;padding:1rem;overflow-x:auto;white-space:pre-wrap}
-.drops{height:14px;margin:1.6rem 0;border-top:2px solid var(--accent)}
-.callout{border-left:8px solid var(--accent);padding:.2rem 1.3rem 1rem;margin:1.3rem 0;background:rgba(255,255,255,.35)}
-.flag{border:3px solid var(--accent);padding:.2rem 1.2rem 1rem;margin:1.2rem 0}
-.entry{display:flex;gap:1rem;padding:.55rem 0;border-bottom:1px solid rgba(30,28,36,.22)}.entry b{min-width:210px}
-.count{color:#8cd8e0;font-weight:bold}
+<title>codeintel-dependency-update-notifier: The Pigeon Loft</title>
+<style>
+@font-face { font-family: "Syne"; src: url("fonts/Syne-700.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Kulim Park"; src: url("fonts/KulimPark-400.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Kulim Park"; src: url("fonts/KulimPark-700.woff2") format("woff2"); font-weight: 700; }
+:root {
+  --paper: #f6f1e6; --cream: #e9dfc9; --ink: #2b2620; --soft: #6d5f49;
+  --accent: #5a6b8a; --deep: #37455e; --line: #d3c4a2; --card: #ffffff;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: "Kulim Park", sans-serif; line-height: 1.55; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 64px; }
+header.hero { text-align: center; padding: 52px 0 8px; }
+img.hero-logo { width: min(430px, 82vw); border-radius: 10px; box-shadow: 0 10px 34px rgba(40,32,24,.22); }
+h1, h2 { font-family: "Syne", sans-serif; line-height: 1.15; }
+h1 { font-size: clamp(26px, 5vw, 44px); margin: 26px 0 6px; }
+.tagline { color: var(--soft); font-size: 19px; margin: 0 auto; max-width: 680px; }
+.btns { margin: 22px 0 6px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+a.btn { font-family: "Syne", sans-serif; text-decoration: none; padding: 11px 22px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); background: transparent; }
+a.btn.solid { background: var(--deep); border-color: var(--deep); color: #fff; }
+figure { margin: 30px 0; }
+figure img { width: 100%; border-radius: 10px; display: block; box-shadow: 0 8px 28px rgba(40,32,24,.18); }
+figcaption { color: var(--soft); font-size: 15px; text-align: center; margin-top: 9px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 34px 0; }
+.fact { background: var(--card); border: 1px solid var(--line); border-top: 5px solid var(--accent); border-radius: 8px; padding: 14px 16px; }
+.fact b { display: block; font-family: "Syne", sans-serif; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+section { margin: 38px 0; }
+h2 { font-size: 27px; margin: 0 0 12px; border-bottom: 2px solid var(--line); padding-bottom: 7px; }
+code, pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+pre { background: #232a38; color: #edf0f6; padding: 15px 18px; border-radius: 8px; overflow-x: auto; font-size: 14.5px; }
+table { border-collapse: collapse; width: 100%; background: var(--card); }
+th, td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; }
+th { font-family: "Syne", sans-serif; background: var(--cream); }
+.hold { background: #f4f0fa; border: 1px solid #cfc8e4; border-left: 6px solid var(--accent); border-radius: 8px; padding: 16px 20px; }
+.hold h2 { border: none; padding: 0; }
+.hold ul { margin: 8px 0 4px; padding-left: 20px; }
+footer { margin-top: 52px; border-top: 2px solid var(--line); padding-top: 16px; color: var(--soft); font-size: 14.5px; text-align: center; }
 </style>
 </head>
 <body>
+<div class="wrap">
 <header class="hero">
-<img class="heroimg" src="assets/intro-banner.png" alt="Reef with no lettering: silt and shell spirals in the foreground, the glass sponge lattice lit in midground with worm crowns open beside it, and channel dark behind with falling motes">
-<div class="in">
-<img class="logo" src="assets/logo.png" alt="One glass sponge, a vase of silica footed on reef rock with a fine regular lattice, glacier melt cyan light through its walls, plankton green at the rim, and the name below in dark blue on pale silt">
-<h1>codeintel-dependency-update-notifier</h1>
-<p>A dive log, read top to bottom, entry by entry. Krill pink is spent once per entry, on the count line only.</p>
-<nav><a class="btn" href="#s0">Scan the Installed Set</a><a class="btn" href="#s1">Limit to a Requirements File</a><a class="btn" href="#s2">Choose the Project Folder</a><a class="btn" href="#s3">Run the Safety Check</a><a class="btn" href="#s4">Read the Help</a></nav>
-</div>
+  <img class="hero-logo" src="assets/logo.png" alt="One slate blue racing pigeon at rest on a timber perch, its plain yellow leg band showing and the loft boards soft behind">
+  <h1>codeintel-dependency-update-notifier</h1>
+  <p class="tagline">The Pigeon Loft. A command line tool that reports which installed packages have a newer version waiting on the public index, learning the news one package at a time.</p>
+  <div class="btns">
+    <a class="btn solid" href="https://github.com/ShadowGuard-AI/codeintel-dependency-update-notifier">The repository</a>
+    <a class="btn" href="https://github.com/ShadowGuard-AI/codeintel-dependency-update-notifier/blob/main/main.py">main.py</a>
+  </div>
 </header>
-<main>
-<section class="plate" id="s0"><h2>Reef Log, the Task</h2><p>Scans project dependencies and notifies the user if there are newer versions available, potentially including security updates. Uses pip and packaging.</p><p>Code facts, stated beside it: installed packages come from pip list, read as JSON. Latest versions are not fetched from an index page. The code asks pip to install a version that cannot exist; pip refuses, and its refusal lists every version it knows. The code reads the last version in that list and calls it latest.</p><p>Risk note, at the same size: pip order is trusted. Another order, wrong answer.</p></section>
-<div class="drops"></div>
-<section class="plate" id="s1"><h2>Clone Line, Flagged</h2><pre>git clone https://github.com/ShadowStrikeHQ/codeintel-dependency-update-notifier</pre><div class='flag'><h3>Clone line flagged</h3><p>Wrong organisation. The organisation is ShadowGuard-AI. The line is printed exactly as the README prints it and is not fixed in place.</p></div><p>Repository fact, not a README fact: requirements.txt lists packaging at 23.0 or above. Nothing else.</p></section>
-<div class="drops"></div>
-<section class="plate" id="s2"><h2>Invocation, the True Line at Full Size</h2><pre>python3 main.py [-r REQUIREMENTS] [-p PROJECT_PATH] [-v] [--check-security]</pre><p>That is the true line, from the parser in main.py. Below it, small and labelled, the README line as printed:</p><pre>./codeintel-dependency-update-notifier [params]</pre><p>Status: placeholder. No such entry point. No such argument.</p></section>
-<div class="drops"></div>
-<section class="plate" id="s3"><h2>Arguments, Parser Order</h2><div class='entry'><b>-h</b><span>Help message, then exit.</span></div><div class='entry'><b>-r, --requirements</b><span>Path to a requirements file. Default: none. Only names are taken from the file: specifiers are dropped, extras are dropped, markers are dropped, comment text is cut, lines starting with a dash are skipped, and names are normalised to lower case with underscore changed to dash. The installed list is then cut down to those names. Failure fact: file unreadable, run exits 1. It does not fall back to checking everything.</span></div><div class='entry'><b>-p, --project_path</b><span>Path to the project directory. Default: the current directory.</span></div><div class='entry'><b>-v, --verbose</b><span>Verbose logging.</span></div><div class='entry'><b>--check-security</b><span>Check for known security vulnerabilities using safety.</span></div></section>
-<div class="drops"></div>
-<section class="plate" id="s4"><h2>Probed and Counted, Last in the List Means Latest</h2><p class='count'>Summary: probed=N updated=N unknown=N</p><p>That closing line prints on every completed scan. Updates are then listed, name by name, installed version beside latest version. The up to date line is printed only when probed equals the number checked, unknown is zero, and no update waits. Any other outcome prints instead: Update check incomplete: some packages could not be checked.</p><div class='callout'><h3>Unknown Packages End the Run at Exit 1</h3><p>Exit 1: any checked package ends unknown. Exit 1: installed packages cannot be retrieved at all. Exit 1 under --check-security: safety is missing, or the safety run fails.</p></div><div class='callout'><h3>Safety Findings Are Not a Failed Safety Run</h3><p>Safety return code 1 means findings, and findings count as a finished check here, not a failed one. Return code 0 means no findings. Other codes fail the security half.</p></div></section>
-<div class="drops"></div>
-<section class="plate" id="s5"><h2>Licence Entry, Last in the Log</h2><pre>Copyright (c) ShadowStrikeHQ</pre><p>The README line as printed: wrong organisation, the same fault as the clone line. Repository fact: the LICENSE file carries the MIT License. Both facts are printed. Neither is reconciled silently.</p></section>
-</main>
-<footer><p>Theme: Glass Sponge Reef of the Deep Channel. Type: Baumans for display, Cabin for reading, both SIL Open Font License 1.1.</p></footer>
+<figure>
+  <img src="assets/banner.png" alt="A keeper at the open landing trap of a timber loft holding the arriving pigeon, rows of settled pigeons watching from the perches and nest boxes behind">
+  <figcaption>An arrival taken down and read against what the keeper already has.</figcaption>
+</figure>
+
+<div class="facts">
+  <div class="fact"><b>Installed set</b>Read from pip list in JSON form, with the project path handed to pip when one is given</div>
+  <div class="fact"><b>Latest version</b>Learned by deliberately failing a pip install and taking the last entry of the version list in pip's own error message</div>
+  <div class="fact"><b>Summary</b>Every run prints probed, updated, and unknown counts; the up to date line prints only when every package was probed and none waits</div>
+  <div class="fact"><b>Exit</b>Any package ending unknown ends the run at exit 1</div>
+</div>
+<section>
+  <h2>Usage</h2>
+  <pre>python3 main.py [-r REQUIREMENTS_FILE] [-p PROJECT_PATH] [-v] [--check-security]</pre>
+  <p>A requirements file narrows the check to its names only: specifiers, extras, and markers are dropped before matching, and an unreadable file ends the run at exit 1 with no fallback to checking everything. That names-only behaviour is a fact of the code the README parameter list does not state. Under --check-security, safety's own exit 1 means findings and counts as a finished check; only a missing safety tool or another return code fails that half.</p>
+<table>
+    <tr><th>Option</th><th>What it does</th></tr>
+    <tr><td><code>-r</code></td><td>Narrow the check to the names in this requirements file.</td></tr>
+    <tr><td><code>-p</code></td><td>The project directory handed to pip list. Default the current directory.</td></tr>
+    <tr><td><code>-v</code></td><td>Verbose logging.</td></tr>
+    <tr><td><code>--check-security</code></td><td>Add a run of the safety tool with its full report.</td></tr>
+  </table>
+</section>
+<section class="hold">
+  <h2>What the report rests on</h2>
+  <ul>
+    <li>The latest version is trusted to pip's ordering: the run takes the final entry of the failed install's version list as latest, and never checks that ordering itself.</li>
+    <li>A package that cannot be probed is not quietly passed over; it ends the whole run at exit 1.</li>
+    <li>The usage line in the README is a placeholder naming an executable the repo does not ship; the real invocation is the one above.</li>
+  </ul>
+</section>
+<section>
+  <h2>Requirements</h2>
+  <p>Python with packaging 23.0 or later, pip itself, and the safety tool when --check-security is used.</p>
+</section>
+<footer>
+<p>The README of codeintel-dependency-update-notifier closes with a copyright line naming ShadowStrikeHQ, and its clone URL names the same stale org; the repository carries a separate LICENSE file headed MIT License. Site type is set in Syne and Kulim Park, self-hosted under the SIL Open Font License.</p>
+</footer>
+</div>
 </body>
 </html>

@@ -1,12 +1,10 @@
-![Reef with no lettering and no survey tag: silt with shell spirals lying open side up in the foreground, the sponge foot on rock, the lattice body lit in midground with tube worm crowns open beside it, and channel dark behind with falling motes and light thinning upward to black](intro-banner.png)
-
 # codeintel-Dependency-Update-Notifier
 
 Title block: the name above is set in Baumans in plankton green on a pale panel ruled like a log page. One small glass sponge stands beside this title as the marker for this repo, at punctuation size everywhere else.
 
-![One glass sponge, a vase of silica footed on reef rock, fine regular lattice, glacier melt cyan light through the lattice walls, plankton green at the rim, dark blue shadow behind the foot, two empty shell spirals at rest on the ground line, and the name below hand cut in sounding line style in dark blue on pale silt](logo.png)
+![One slate blue racing pigeon at rest on a timber perch, its plain yellow leg band showing and the loft boards soft behind](logo.png)
 
-![Reef in a wide frame lit from one side: the tall sponge lit first with its foot fixed to rock, tube worm clusters with crowns open and plumes still, shell spirals between the worm bases, channel water dark blue with silt motes falling, a lamp beam from off frame left, and the name only on a survey tag wired to the reef rock, in krill pink on dark blue](banner.png)
+![A keeper at the open landing trap of a timber loft holding the arriving pigeon, rows of settled pigeons watching from the perches and nest boxes behind](banner.png)
 
 ![The reef in three depths: silt motes falling slowly in dark channel water, water passing through the sponge wall and leaving at the top while the sponge body stays still, tube worm crowns opening and closing once when a mote lands, and empty shell spirals at rest on the silt with one mote settling on a shell lip per cycle](scene.svg)
 
