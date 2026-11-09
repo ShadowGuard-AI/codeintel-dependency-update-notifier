@@ -1,3 +1,5 @@
+![The keeper holding the arrived pigeon close up in both hands, the small dark capsule at its leg between his fingers, the bird's legs hidden behind his hands with one bare foot showing past them, the perch rows and nest boxes soft behind](intro-banner.png)
+
 # codeintel-Dependency-Update-Notifier
 
 Title block: the name above is set in Baumans in plankton green on a pale panel ruled like a log page. One small glass sponge stands beside this title as the marker for this repo, at punctuation size everywhere else.
